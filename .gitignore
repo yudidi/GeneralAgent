@@ -49,3 +49,4 @@ examples/9_knowledge_files/*
 ga/*
 html/*
 .history
+venv/*
