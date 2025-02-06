@@ -132,7 +132,7 @@ class Agent:
         self.knowledge_interpreter = KnowledgeInterpreter(
             workspace, knowledge_files=knowledge_files, rag_function=rag_function
         )
-        self.interpreters = [
+        self.interpreters = [ # ydd: 只注册3种执行器，function call主要设计python脚本解释执行器
             self.role_interpreter,
             self.python_interpreter,
             self.knowledge_interpreter,
@@ -412,6 +412,11 @@ class Agent:
                         and interpreter.__class__ == PythonInterpreter
                     ):
                         continue
+                    """
+                    具体来说， user_input 方法会调用 _run 方法，而 _run 方法会通过 _llm_and_parse_output 方法来处理输入和输出。
+                    在 _llm_and_parse_output 方法中， interpreter.output_parse(result) 会解析 LLM 的输出，并在匹配到相应的函数调用时执行这些函数。
+                    因此， get_weather 函数是在 interpreter.output_parse(result) 这一行被调用的。
+                    """
                     if interpreter.output_match(result):
                         logging.debug("interpreter: " + interpreter.__class__.__name__)
                         message_id = self.memory.add_message("assistant", result)

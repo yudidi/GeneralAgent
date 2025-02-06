@@ -150,6 +150,7 @@ print('Hello, world!')
                 save_globals.__delitem__(key)
         return save_globals
 
+    # 具体是这个子类调用的,可以执行shell,python,mac等脚本
     def output_parse(self, string) -> (str, bool):
         pattern = re.compile(self.output_match_pattern, re.DOTALL)
         match = pattern.search(string)
