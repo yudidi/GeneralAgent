@@ -1,4 +1,6 @@
-3. 使用虚拟环境（最佳实践）：
+参考: docs/develop.md
+
+3.使用虚拟环境（最佳实践）：
 ```bash
 # 创建虚拟环境
 python -m venv venv
